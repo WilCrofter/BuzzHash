@@ -1,5 +1,5 @@
 module BuzzHash
 
-# package code goes here
+include("step2.jl")
 
 end # module
