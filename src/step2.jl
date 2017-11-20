@@ -6,3 +6,7 @@ function sprand_fd{T<:Integer}(KC::T, PN::T, PN_per_KC::T)
     for i in 1:KC ans[i,:]=shuffle(tmp) end
     return ans
 end
+
+function sprand_fd{T<:Integer, R<:Real}(KC::T, PN::T, density::R)
+    sprand(Bool,KC,PN)
+end
