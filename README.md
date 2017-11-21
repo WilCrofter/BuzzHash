@@ -6,7 +6,7 @@ An implementation of the algorithm described by Desgupta, *et. al.*, in the abov
 
 The algorithm is simple. Its input is a real vector, **x**, which in the fly's case has 50 components representing aggregate output of 50 types of olfactory receptor. The first step is to form **x-mean(x)** *i,e,* to subtract the mean of **x** from each of its elements. This mimics the biological step known as divisive normalization. The "mean centered" input is then multiplied by a sparse 1/0 matrix, **A**, which expands the number of components in **x-mean(x)**. In the fly's case, the 50 components are expanded to 2000, each of the 2000 values being an aggregate of about 6 original. The non-zero components of **A** are randomly chosen and, of course, once chosen are fixed. The final step is zeroize all but the largest few components of **A(x-mean(x))**, leaving a sparse vector to act as a tag. In the fly's case the top 5% are retained.
 
-This package provides two algorithms, `sprand_fd` to form the matrix, **A**, and `buzzhash(A, x, topN)` to apply the algoritm to **x**, retaining the `topN` maximum values.
+This package provides two algorithms, `sprand_fd` to form the matrix, **A**, and `buzzhash(A, x, topN)` to apply the algorithm to **x**, retaining the `topN` maximum values.
 
 ### References:
 
