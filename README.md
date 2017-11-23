@@ -6,7 +6,9 @@ An implementation of the algorithm described by Desgupta, *et. al.*, in the abov
 
 The algorithm is simple. Its input is a real vector, **x**, which in the fly's case has 50 components representing aggregate output of 50 types of olfactory receptor. The first step is to form **x-mean(x)** *i,e,* to subtract the mean of **x** from each of its elements. This mimics the biological step known as divisive normalization. The "mean centered" input is then multiplied by a sparse 1/0 matrix, **A**, which expands the number of components in **x-mean(x)**. In the fly's case, the 50 components are expanded to 2000, each of the 2000 values being an aggregate of about 6 original. The non-zero components of **A** are randomly chosen and, of course, once chosen are fixed. The final step is zeroize all but the largest few components of **A(x-mean(x))**, leaving a sparse vector to act as a tag. In the fly's case the top 5% are retained.
 
-This package provides two algorithms, `sprand_fd` to form the matrix, **A**, and `buzzhash(A, x, topN)` to apply the algorithm to **x**, retaining the `topN` maximum values.
+With high probability, the columns of matrix **A** are linearly independent, which means the input, **x-mean(x)**, can be recovered from its the product, **A(x-mean(x))**. Note, however, that the final step in which all but the largest values of **A(x-mean(x))** are zeroized would make recovery from the final hash approximate at best.  
+
+This package provides three algorithms, `sprand_fd` to form the matrix, **A**, `buzzhash(A, x, topN)` to apply the algorithm to **x**, retaining the `topN` maximum values, and `inverse(A)` to form the matrix which can recover **x-mean(x)** from the product **A(x-mean(x))**.
 
 ### References:
 
