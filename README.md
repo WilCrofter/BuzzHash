@@ -19,3 +19,9 @@ This package provides three algorithms, `sprand_fd` to form the matrix, **A**, `
 [3] Charles F. Stevens [What the fly's nose tells the fly's brain](http://www.pnas.org/content/112/30/9460.full)
 
 [future] John Myles White [MNIST.jl](https://github.com/johnmyleswhite/MNIST.jl#mnistjl)
+
+[future] A. A. Fenton *et. al.* 
+[Unmasking the CA1 ensemble place code by exposures to small and large environments: more place cells and multiple, irregularly-arranged, and expanded place fields in the larger space](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2695947/)
+
+[future]Kiehn and Forssberg [Scientific Background: The Brain's 
+Navigational Place and Grid Cell System](https://www.nobelprize.org/nobel_prizes/medicine/laureates/2014/advanced-medicineprize2014.pdf)(PDF)

@@ -1,5 +1,7 @@
 module BuzzHash
 
+export sprand_fd, buzzhash, clip, clip!, inverse
+
 """ sprand_fd(KC, PN, PN_per_KC)
     
     Returns a KC by PN sparse 1/0 (technically Bool)  matrix in which each row has exactly PN_per_KC randomly placed 1's. KC and PN abbreviate Kenyon Cells and Projection Neurons, respectively, to acknowledge the algorithm's biological source. Generally KC is much larger than PN (e.g., 2000 vs 50) and PN_per_KC is relatively small (e.g., 5% of KC). 
@@ -34,6 +36,25 @@ function buzzhash{R<:Real,T<:Integer}(A::SparseMatrixCSC{Bool,Int}, x::Vector{R}
     return sparsevec(perm[1:topN], tmp[perm[1:topN]]) 
 end
 
+""" clip!(V)
+    
+    In place, set all the positive entries of sparse vector, V, to 1.
+    """
+function clip!{T<:Real}(V::SparseVector{T, Int}) 
+    V[V.>0]=1
+    nothing
+end
+
+""" clip(V)
+    
+    Return a clipped copy of V, leaving V unchanged.
+    """
+function clip{T<:Real}(V::SparseVector{T, Int})::SparseVector{T,Int}
+    tmp=deepcopy(V)
+    clip!(tmp)
+    return tmp
+end
+         
 """ inverse(A)
 
     When KC >> PN the PN columns of a sparse random matrix formed by sprand_fd are linearly independent with high probability. This implies that the map, y = Ax, is invertable--that x can be recovered from y. The inverse mapping is inv(A'A)A' where A' is the transpose of A and inv indicates inverse. The inversion will be at best approximate, of course, after the final hashing step in which all but the largest values are zeroized.
