@@ -23,38 +23,19 @@ function sprand_fd{T1<:Integer, T2<:Integer, R<:Real}(KC::T1, PN::T2, p::R)::Spa
     return sprand(Bool,KC,PN,p)
 end
 
-""" buzzhash(A, x, topN)
+""" buzzhash(A, x, topN; clip=true)
 
-    Return a sparse vector formed by applying A to x-mean(x), and zeroizing all but the topN largest components of the result. A is a random, sparse, binary (technically Bool) matrix implementing the expansion stage of the algorithm. 
+    Return a sparse vector formed by applying A to x-mean(x), zeroizing all but the topN largest components of the result, and by default setting the remaining components to 1 ("clipping" them.) To retain the component values, call with `clip=false`. A is a random, sparse, binary (technically Bool) matrix implementing the expansion stage of the algorithm. 
 """
-function buzzhash{R<:Real,T<:Integer}(A::SparseMatrixCSC{Bool,Int}, x::Vector{R}, topN::T)::SparseVector{Float64,Int}
+function buzzhash{R<:Real,T<:Integer}(A::SparseMatrixCSC{Bool,Int}, x::Vector{R}, topN::T; clip::Bool=true)::SparseVector{Float64,Int}
     # center x and apply A
     tmp = A*(x-mean(x))
     # find the permutation which sorts tmp in descending order
     perm = sortperm(tmp, rev=true)
     # return a sparse vector containing the largest topN elements of the result.
-    return sparsevec(perm[1:topN], tmp[perm[1:topN]]) 
+    return sparsevec(perm[1:topN], clip ? 1 : tmp[perm[1:topN]], size(A,1)) 
 end
 
-""" clip!(V)
-    
-    In place, set all the positive entries of sparse vector, V, to 1.
-    """
-function clip!{T<:Real}(V::SparseVector{T, Int}) 
-    V[V.>0]=1
-    nothing
-end
-
-""" clip(V)
-    
-    Return a clipped copy of V, leaving V unchanged.
-    """
-function clip{T<:Real}(V::SparseVector{T, Int})::SparseVector{T,Int}
-    tmp=deepcopy(V)
-    clip!(tmp)
-    return tmp
-end
-         
 """ inverse(A)
 
     When KC >> PN the PN columns of a sparse random matrix formed by sprand_fd are linearly independent with high probability. This implies that the map, y = Ax, is invertable--that x can be recovered from y. The inverse mapping is inv(A'A)A' where A' is the transpose of A and inv indicates inverse. The inversion will be at best approximate, of course, after the final hashing step in which all but the largest values are zeroized.
