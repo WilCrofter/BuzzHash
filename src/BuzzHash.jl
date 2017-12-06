@@ -2,25 +2,30 @@ module BuzzHash
 
 export sprand_fd, buzzhash, clip, clip!, inverse
 
-""" sprand_fd(KC, PN, PN_per_KC)
-    
-    Returns a KC by PN sparse 1/0 (technically Bool)  matrix in which each row has exactly PN_per_KC randomly placed 1's. KC and PN abbreviate Kenyon Cells and Projection Neurons, respectively, to acknowledge the algorithm's biological source. Generally KC is much larger than PN (e.g., 2000 vs 50) and PN_per_KC is relatively small (e.g., 5% of KC). 
-    """
-function sprand_fd{T1<:Integer, T2<:Integer, T3<:Integer}(KC::T1, PN::T2, PN_per_KC::T3)::SparseMatrixCSC{Bool,Int}
-    KC > 0 && PN > 0 || error("KC and PN must be positive.")   
-    tmp = spzeros(Bool,PN)
-    for i in 1:PN_per_KC tmp[i]=true end
-    ans = spzeros(Bool,KC,PN)
-    for i in 1:KC ans[i,:]=shuffle(tmp) end
-    return ans
-end
-
 """ sprand_fd(KC, PN, p)
     
-    If the last argument, p, is a real number between 0.0 and 1.0, a sparse matrix whose entries are 1 (true) with probability, p. In other words, sprand_fd is an alias for Base.sprand.
+    Returns a KC by PN sparse 1/0 (technically Bool) matrix in which each entry is `true` with probability p.KC and PN abbreviate Kenyon Cells and Projection Neurons, respectively, to acknowledge the algorithm's biological source. Generally KC is much larger than PN (e.g., 2000 vs 50) and p is relatively small (e.g., 0.05). 
+   
+    (I.e., sprand_fd is just a wrapper for Base.sprand.)
     """
 function sprand_fd{T1<:Integer, T2<:Integer, R<:Real}(KC::T1, PN::T2, p::R)::SparseMatrixCSC{Bool,Int}
     return sprand(Bool,KC,PN,p)
+end
+
+""" sprand_fd(KC, PN, PN_per_KC)
+    
+    If the last argument is an integer sprand_fd returns a KC by PN sparse 1/0 (technically Bool) matrix in which each row has exactly PN_per_KC randomly placed 1's. This version is much slower.
+    """
+function sprand_fd{T1<:Integer, T2<:Integer, T3<:Integer}(KC::T1, PN::T2, PN_per_KC::T3)::SparseMatrixCSC{Bool,Int}
+    KC > 0 && PN > 0 || error("KC and PN must be positive.")   
+    tmp = collect(1:PN)
+    idx = 1:PN_per_KC
+    ans = spzeros(Bool,KC,PN)
+    for i in 1:KC
+        shuffle!(tmp)
+        ans[i,tmp[idx]]=true
+    end
+    return ans
 end
 
 """ buzzhash(A, x, topN; clip=true)
