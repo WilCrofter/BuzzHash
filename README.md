@@ -8,9 +8,11 @@ The algorithm is simple. Its input is a real vector, **x**, which in the fly's c
 
 With high probability, the columns of matrix **A** are linearly independent, which means the input, **x-mean(x)**, can be recovered from its the product, **A(x-mean(x))**. Note, however, that the final step in which all but the largest values of **A(x-mean(x))** are zeroized would make recovery from the final hash approximate at best.  
 
-This package provides three algorithms, `sprand_fd` to form the matrix, **A**, `buzzhash(A, x, topN)` to apply the algorithm to **x**, retaining the `topN` maximum values, and `inverse(A)` to form the matrix which can recover **x-mean(x)** from the product **A(x-mean(x))**.
+This package provides three algorithms, `sprand_fd` to form the matrix, **A**, `buzzhash(A, x, topN)` to apply the algorithm to **x**, retaining the `topN` maximum values, and `inverse(A)` to form the matrix which can recover **x-mean(x)** from the product **A(x-mean(x))**. The notebook, [`usage.ipynb`](https://github.com/WilCrofter/BuzzHash/blob/master/notebooks/usage.ipynb) illustrates basic usage.
 
 Interested parties should also see @dataplayer12's [Python implementation](https://github.com/dataplayer12/Fly-LSH) and his very nice [explanatory post at Medium](https://medium.com/@jaiyamsharma/efficient-nearest-neighbors-inspired-by-the-fruit-fly-brain-6ef8fed416ee).
+
+**TODO:** Intial implementations of `sprand_fd(KC, PN, PN_per_KC)` and `inverse(A)` require optimization. They perform very poorly for large `KC`.
 
 ### References:
 
@@ -20,10 +22,11 @@ Interested parties should also see @dataplayer12's [Python implementation](https
 
 [3] Charles F. Stevens [What the fly's nose tells the fly's brain](http://www.pnas.org/content/112/30/9460.full)
 
-[future] John Myles White [MNIST.jl](https://github.com/johnmyleswhite/MNIST.jl#mnistjl)
+[4] John Myles White [MNIST.jl](https://github.com/johnmyleswhite/MNIST.jl#mnistjl)
+
+[future] Cengiz Pehlevan, Alexander Genkin, Dmitri B. Chklovskii, [A clustering neural network model of insect olfaction](https://www.biorxiv.org/content/early/2017/11/30/226746) [doi: https://doi.org/10.1101/226746](https://doi.org/10.1101/226746) 
 
 [future] A. A. Fenton *et. al.* 
 [Unmasking the CA1 ensemble place code by exposures to small and large environments: more place cells and multiple, irregularly-arranged, and expanded place fields in the larger space](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2695947/)
 
-[future]Kiehn and Forssberg [Scientific Background: The Brain's 
-Navigational Place and Grid Cell System](https://www.nobelprize.org/nobel_prizes/medicine/laureates/2014/advanced-medicineprize2014.pdf)(PDF)
+[future]Kiehn and Forssberg [Scientific Background: The Brain's Navigational Place and Grid Cell System](https://www.nobelprize.org/nobel_prizes/medicine/laureates/2014/advanced-medicineprize2014.pdf)(PDF)
