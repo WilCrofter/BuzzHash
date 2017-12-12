@@ -12,7 +12,7 @@ This package provides three algorithms, `sprand_fd` to form the matrix, **A**, `
 
 Interested parties should also see @dataplayer12's [Python implementation](https://github.com/dataplayer12/Fly-LSH) and his very nice [explanatory post at Medium](https://medium.com/@jaiyamsharma/efficient-nearest-neighbors-inspired-by-the-fruit-fly-brain-6ef8fed416ee).
 
-**TODO:** Intial implementations of `sprand_fd(KC, PN, PN_per_KC)` and `inverse(A)` require optimization. They perform very poorly for large `KC`.
+**TODO:** Initial implementations of `sprand_fd(KC, PN, PN_per_KC)` and `inverse(A)` require optimization. They perform very poorly for large `KC`.
 
 ### References:
 
