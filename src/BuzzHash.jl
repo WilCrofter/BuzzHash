@@ -1,6 +1,6 @@
 module BuzzHash
 
-export sprand_fd, buzzhash, clip, clip!, inverse
+export sprand_fd, buzzhash, inverse
 
 """ sprand_fd(KC, PN, p)
     

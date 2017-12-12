@@ -10,6 +10,8 @@ With high probability, the columns of matrix **A** are linearly independent, whi
 
 This package provides three algorithms, `sprand_fd` to form the matrix, **A**, `buzzhash(A, x, topN)` to apply the algorithm to **x**, retaining the `topN` maximum values, and `inverse(A)` to form the matrix which can recover **x-mean(x)** from the product **A(x-mean(x))**.
 
+Interested parties should also see @dataplayer12's [Python implementation](https://github.com/dataplayer12/Fly-LSH) and his very nice [explanatory post at Medium](https://medium.com/@jaiyamsharma/efficient-nearest-neighbors-inspired-by-the-fruit-fly-brain-6ef8fed416ee).
+
 ### References:
 
 [1] S. Dasgupta, C. F. Stevens, and S. Navlakha (2017). [A neural algorithm for a fundamental computing problem.](http://science.sciencemag.org/content/358/6364/793.full?ijkey=aX3uts9Y4xqPE&keytype=ref&siteid=sci) Science, 358, 6364:793-796.

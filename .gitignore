@@ -14,4 +14,7 @@
 # notes
 notes/*
 
+# checkpoints
+src/.ipynb_checkpoints/*
+
 
