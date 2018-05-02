@@ -1,6 +1,8 @@
 # BuzzHash
 
-A locality sensitive hashing algorithm based on Desgupta, *et. al.* [A neural algorithm for a fundamental computing problem](http://dx.doi.org/10.1101/180471) (preprint).
+A locality sensitive hashing algorithm based on Dasgupta, *et. al.* [A neural algorithm for a fundamental computing problem](http://dx.doi.org/10.1101/180471) (preprint).
+
+(See also Groschner *et. al.* [Dendritic Integration of Sensory Evidence in Perceptual Decision-Making](https://www.cell.com/cell/fulltext/S0092-8674(18)30447-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867418304471%3Fshowall%3Dtrue))
 
 An implementation of the algorithm described by Desgupta, *et. al.*, in the above reference and recently published in Science magazine [1]. The algorithm is based on the olfactory system of *Drosophila melanogaster*, though it is not a simulation of that system. It is, instead, a biomimetic abstraction applicable to the computer science problem of similarity search, but might well serve as an abstract model of neural organization applicable to other organisms and neural subsystems. In the last regard, the authors mention three possibilities: mouse olfaction, rat cerebellum, and rat hippocampus including entorhinal cortex, dentate gyrus, and hilar cells.
 
